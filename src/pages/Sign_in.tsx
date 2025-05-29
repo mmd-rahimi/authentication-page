@@ -1,7 +1,8 @@
+import LoginModule from "@/components/my components/LoginModule"
 
 function Sign_in() {
   return (
-    <div>Sign_in</div>
+    <div><LoginModule /></div>
   )
 }
 
