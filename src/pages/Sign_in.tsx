@@ -1,4 +1,4 @@
-import LoginModule from "@/components/my components/LoginModule"
+import LoginModule from "@/components/my components/LoginForm/LoginModule"
 
 function Sign_in() {
   return (

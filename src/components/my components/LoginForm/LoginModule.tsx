@@ -1,3 +1,4 @@
+import LoginForm from "./LoginForm"
 
 function LoginModule() {
   return (
@@ -16,7 +17,11 @@ function LoginModule() {
                 </div>
             </div>
             {/* input side */}
-            <div className="bg-red-200 h-[72%] w-full lg:h-full lg:w-[40%] "></div>
+            <div className="bg-red-200 h-[72%] w-full lg:h-full lg:w-[40%] px-6 py-12 flex flex-row justify-center items-center">
+              <div className="flex flex-col">
+              <LoginForm />
+              </div>
+            </div>
         </div>
     </div>
   )
