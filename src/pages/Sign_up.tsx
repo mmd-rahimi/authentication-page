@@ -1,7 +1,10 @@
+import CreateAccountModule from "@/components/my components/SignUpForm/CreateAccountModule"
 
 function Sign_up() {
   return (
-    <div>Sign-up</div>
+    <div>
+      <CreateAccountModule />
+    </div>
   )
 }
 
