@@ -6,7 +6,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="lightBg dark:lightBg">
+    <div className="bgCol dark:bgCol">
     <div className="flex flex-col items-center justify-center min-h-svh">
       <Router>
         <Routes>

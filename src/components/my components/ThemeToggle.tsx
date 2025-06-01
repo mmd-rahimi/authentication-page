@@ -13,11 +13,11 @@ function ThemeToggle() {
         aria-label={`Change to ${theme === "light" ? "dark" : "light"} mode`}
       >
         {theme === "light" ? (
-          <span className="text-3xl">
+          <span className="text-3xl text-blue-950">
             <IoMoon />
           </span>
         ) : (
-          <span className="text-3xl">
+          <span className="text-3xl text-yellow-300">
             <IoMdSunny />
           </span>
         )}
