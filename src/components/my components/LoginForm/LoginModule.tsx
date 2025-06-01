@@ -19,12 +19,11 @@ function LoginModule() {
           <ThemeToggle />
         </div>
         {/* text side */}
-        <div className="formBgCol dark:formBgCol border-black max-lg:border-b-2 lg:border-r-2 dark:border-white text-black dark:text-white w-full h-[28%] p-4 sm:py-6 lg:h-full lg:w-[60%]">
-          <div className="flex flex-col justify-center items-center gap-4">
-            <h1 className="text-3xl font-bold">Welcome</h1>
+        <div className="flex justify-center items-center bg-white dark:bg-black border-black max-lg:border-b-2 lg:border-r-2 dark:border-white text-black dark:text-white w-full h-[28%] p-4 sm:py-6 lg:h-full lg:w-[60%]">
+          <div className="flex flex-col justify-center items-center gap-4 lg:gap-6">
+            <h1 className="text-3xl font-bold">Welcome to login page</h1>
             <p className="text-center font-[500]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              excepturi earum aliquam deleniti voluptatem provident.
+              This page is just a practice authentication page and a sample of work.
             </p>
           </div>
         </div>
