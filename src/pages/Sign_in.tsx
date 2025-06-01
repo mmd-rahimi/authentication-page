@@ -1,8 +1,9 @@
 import LoginModule from "@/components/my components/LoginForm/LoginModule"
+import "../index.css";
 
 function Sign_in() {
   return (
-    <div className=""><LoginModule /></div>
+    <div className="lightBg"><LoginModule /></div>
   )
 }
 

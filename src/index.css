@@ -1,3 +1,13 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+@custom-variant dark (&:where(.dark, .dark *));
 
+@layer components {
+  .lightBg {
+    background: #00ADB5;
+    background: linear-gradient(147deg, rgba(0, 173, 181, 1) 40%, rgba(255, 0, 174, 1) 100%);
+  }
+  
+  .dark .lightBg {
+background: #003538;
+background: linear-gradient(147deg,rgba(0, 53, 56, 1) 40%, rgba(176, 0, 120, 1) 100%, rgba(176, 0, 120, 1) 0%);  }
+}

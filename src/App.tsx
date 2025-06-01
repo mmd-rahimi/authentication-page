@@ -2,10 +2,11 @@ import { Route, BrowserRouter as Router, Routes} from "react-router"
 import Sign_in from "./pages/Sign_in"
 import Sign_up from "./pages/Sign_up"
 import  Home  from "./pages/Home"
- 
+import "./index.css";
+
 function App() {
   return (
-    <div className=" bg-amber-100">
+    <div className="lightBg dark:lightBg">
     <div className="flex flex-col items-center justify-center min-h-svh">
       <Router>
         <Routes>
@@ -16,6 +17,8 @@ function App() {
       </Router>
     </div>
     </div>
+
+
 
   )
 }
