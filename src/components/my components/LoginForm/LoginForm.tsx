@@ -21,7 +21,7 @@ function LoginForm() {
             </div>
             </div>
 
-            <div className="flex flex-row justify-center items-center bgCol opacity-90 dark:bgCol rounded-3xl text-black dark:text-white">
+            <div className="flex flex-row justify-center items-center bg-black opacity-90 dark:bg-white rounded-3xl text-white dark:text-black">
                 <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer">Submit</button>
             </div>
         </div>

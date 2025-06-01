@@ -6,18 +6,18 @@ function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex flex-row justify-center items-center rounded-full cursor-pointer hover:bg-amber-600 transition-all duration-300">
+    <div className="flex flex-row justify-center items-center rounded-full cursor-pointer hover:bg-black dark:hover:bg-white transition-all duration-300">
       <button
         onClick={toggleTheme}
         className="p-2 rounded-full focus:outline-none cursor-pointer"
         aria-label={`Change to ${theme === "light" ? "dark" : "light"} mode`}
       >
         {theme === "light" ? (
-          <span className="text-3xl text-blue-950">
+          <span className="text-3xl text-black hover:text-white">
             <IoMoon />
           </span>
         ) : (
-          <span className="text-3xl text-yellow-300">
+          <span className="text-3xl text-white hover:text-black">
             <IoMdSunny />
           </span>
         )}
