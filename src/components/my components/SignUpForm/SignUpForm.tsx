@@ -21,8 +21,8 @@ function SignUpForm() {
             </div>
             </div>
 
-            <div className="flex flex-row justify-center items-center bg-red-500 rounded-3xl cursor-pointer">
-                <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl">Submit</button>
+            <div className="flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
+                <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer">Submit</button>
             </div>
         </div>
     </div>
