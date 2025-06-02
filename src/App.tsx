@@ -6,7 +6,7 @@ import "./index.css";
 
 function App() {
   return (
-    <div className="bgCol dark:bgCol">
+    <div className="bgCol dark:bgCol transition duration-700">
     <div className="flex flex-col items-center justify-center min-h-svh">
       <Router>
         <Routes>
