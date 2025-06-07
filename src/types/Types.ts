@@ -2,7 +2,7 @@ export interface IUser {
     id?: number,
     name: string,
     username: string,
-    passwors: string
+    password: string
 }
 
 export interface IAuthContext {

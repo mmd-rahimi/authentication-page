@@ -18,11 +18,15 @@ function LoginForm() {
       if (success) {
         navigate("/Home");
       } else {
-        setError("نام کاربری یا رمز عبور اشتباه است");
+        setError("The username or password is incorrect");
       }
-    } catch (err) {
-      setError("خطا در ارتباط با سرور");
-    }
+} catch (err) {
+  if (err instanceof Error) {
+    setError(`error communicating with the server: ${err.message}`);
+  } else {
+    setError("Unknown error communicating with the server");
+  }
+}
   };
 
   return (
@@ -47,11 +51,15 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="border px-5 py-2 rounded-3xl w-[18rem]"
-                type="submit"
+                type="password"
                 value={password}
                 placeholder="password"
               />
             </div>
+            {/* set error */}
+            {error && (
+              <p className="error text-red-500 dark:text-red-400">{error}</p>
+            )}
             {/* navigate link */}
             <div className="flex flex-row justify-start items-center w-full px-2">
               <NavLink to="/Creat" className="underline">
@@ -60,7 +68,7 @@ function LoginForm() {
             </div>
           </div>
 
-          <div className="flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
+          <div className="mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
             <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer">
               Submit
             </button>

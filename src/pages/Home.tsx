@@ -1,7 +1,7 @@
 
 function Home() {
   return (
-    <div>Home</div>
+    <div className="text-4xl">Welcome to your dashboard</div>
   )
 }
 

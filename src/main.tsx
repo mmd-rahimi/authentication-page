@@ -3,11 +3,14 @@ import { createRoot } from "react-dom/client";
 import ThemeProvider from "./contexts/ThemeContext";
 import "./index.css";
 import App from "./App.tsx";
+import { AuthProvider } from "./contexts/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <ThemeProvider>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </ThemeProvider>
+  <StrictMode>
+    <AuthProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </AuthProvider>
+  </StrictMode>
 );

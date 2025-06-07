@@ -1,10 +1,8 @@
-import type { IAuthContext, IUser } from "@/types/Types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import type { IAuthContext, IUser } from '@/types/Types';
 
-
-
-const AuthContext = createContext<IAuthContext | null>(null)
+const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -28,8 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-
-    const register = async (userData: Omit<IUser, 'id'>): Promise<boolean> => {
+  const register = async (userData: Omit<IUser, 'id'>): Promise<boolean> => {
     try {
       // Check if username exists
       const checkUser = await axios.get<IUser[]>(
@@ -57,14 +54,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
-
-
-
 
   return (
     <AuthContext.Provider value={{ user, setUser, login, register, logout }}>
@@ -73,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-  export const useAuth = () => {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
