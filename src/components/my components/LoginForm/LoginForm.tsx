@@ -1,65 +1,80 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { loginSchema, type LoginFormData } from "@/schemas/auth";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { FaEye } from "react-icons/fa6";
+import { FaEyeSlash } from "react-icons/fa6";
 
 function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, isLoading } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
 
-    try {
-      const success = await login(username, password);
-      if (success) {
-        navigate("/Home");
-      } else {
-        setError("The username or password is incorrect");
-      }
-} catch (err) {
-  if (err instanceof Error) {
-    setError(`error communicating with the server: ${err.message}`);
-  } else {
-    setError("Unknown error communicating with the server");
-  }
-}
-  };
+  const onSubmit = handleSubmit(async (data) => {
+    await login(data.username, data.password);
+  });
 
   return (
     <div className="">
       <div className="flex flex-col gap-10 justify-center items-center">
         <div className="font-bold text-3xl">User Login</div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="flex flex-col justify-center items-center gap-3">
             {/* inputs */}
+            {/* username */}
             <div>
               <input
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
+                {...register("username")}
+                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  errors.username ? "border-red-500" : "border-gray-300"
+                }`}
                 type="text"
-                value={username}
                 placeholder="username"
               />
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
+            {/* password */}
             <div>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
-                type="password"
-                value={password}
-                placeholder="password"
-              />
+              <div className="flex flex-row justify-between items-center">
+                <input
+                  {...register("password")}
+                  className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  }`}
+                  type={showPassword ? "text" : "password"}
+                  placeholder="password"
+                />
+                <button
+                  className="p-2"
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                  ) : (
+                    <FaEye className="h-5 w-5 text-gray-500" />
+                  )}
+                </button>
+              </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-            {/* set error */}
-            {error && (
-              <p className="error text-red-500 dark:text-red-400">{error}</p>
-            )}
             {/* navigate link */}
             <div className="flex flex-row justify-start items-center w-full px-2">
               <NavLink to="/Creat" className="underline">
@@ -69,8 +84,8 @@ function LoginForm() {
           </div>
 
           <div className="mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
-            <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer">
-              Submit
+            <button className={`flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer ${isLoading ? 'opacity-70' : ''}`} disabled={isLoading} type="submit">
+              {isLoading ? 'Logging in...' : 'Login'}
             </button>
           </div>
         </form>

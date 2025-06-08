@@ -1,87 +1,122 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { registerSchema, type RegisterFormData } from "@/schemas/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router";
 
 function SignUpForm() {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { register } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { register: registerUser, isLoading } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+  });
 
-    if (password !== ConfirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    try {
-      const success = await register({ name, username, password });
-      if (success) {
-        navigate("/");
-      } else {
-        setError("Error in registration");
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Error in registration");
-    }
-  };
+  const onSubmit = handleSubmit(async (data) => {
+    await registerUser(data);
+  });
 
   return (
     <div className="">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="flex flex-col gap-10 justify-center items-center">
           <div className="font-bold text-3xl">User Sign Up</div>
 
           <div className="flex flex-col justify-center items-center gap-3">
             {/* inputs */}
+            {/* name */}
             <div>
               <input
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
+                {...register("name")}
+                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  errors.name ? "border-red-500" : "border-gray-300"
+                }`}
                 type="text"
                 placeholder="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
               />
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
-
+            {/* Username */}
             <div>
               <input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
+                {...register("username")}
+                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  errors.username ? "border-red-500" : "border-gray-300"
+                }`}
                 type="text"
                 placeholder="username"
               />
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
-
+            {/* password */}
             <div>
               <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
-                type="password"
+                {...register("password")}
+                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
+                type={showPassword ? "text" : "password"}
                 placeholder="password"
               />
+              <button
+                type="button"
+                className="absolute right-2 top-98"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                ) : (
+                  <FaEye className="h-5 w-5 text-gray-500" />
+                )}
+              </button>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-
+            {/* confirm Password */}
             <div>
               <input
-                value={ConfirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="border px-5 py-2 rounded-3xl w-[18rem]"
-                type="password"
+                {...register("confirmPassword")}
+                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                }`}
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="confirm password"
               />
+              <button
+                type="button"
+                className="absolute right-2 top-110"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                ) : (
+                  <FaEye className="h-5 w-5 text-gray-500" />
+                )}
+              </button>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
-            {error && (
-              <p className="error text-red-500 dark:text-red-400">{error}</p>
-            )}
             {/* navigate link */}
             <div className="flex flex-row justify-start items-center w-full px-2">
               <NavLink to="/" className="underline">
@@ -90,9 +125,17 @@ function SignUpForm() {
             </div>
           </div>
         </div>
-        <div className="mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
-          <button className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer">
-            Create
+        <div
+          className={`mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100 ${
+            isLoading ? "opacity-70" : ""
+          }`}
+        >
+          <button
+            className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Registering..." : "Register"}
           </button>
         </div>
       </form>

@@ -1,34 +1,25 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
+      "email": "user@example.com",
+      "password": "$2a$10$W8hK5R2L5vWRJYH5z8nX.e6Yg7p9z6J8ZJ7v6Y8L9z5X2rV1bH3dK",
+      "name": "John Doe",
+      "username": "johndoe"
+    },
+    {
+      "id": "78da",
+      "name": "qfrwvwv",
+      "username": "weVwvewrv",
+      "password": "ascasevwrea",
+      "email": "weVwvewrv@example.com"
+    },
+    {
+      "id": "ed3c",
       "name": "mmd",
-      "username": "mmd123",
-      "password": "mmd123"
-    },
-    {
-      "id": "6526",
-      "name": "ali",
-      "username": "ali123",
-      "password": "ali123"
-    },
-    {
-      "id": "7b40",
-      "name": "mmd",
-      "username": "mmd12",
-      "password": "mmd123"
-    },
-    {
-      "id": "4057",
-      "name": "cwqadw",
-      "username": "acaec",
-      "password": ""
-    },
-    {
-      "id": "d165",
-      "name": "ضیص",
-      "username": "ضثیص",
-      "password": ""
+      "username": "mmd1383",
+      "password": "12345678",
+      "email": "mmd1383@example.com"
     }
   ]
 }
