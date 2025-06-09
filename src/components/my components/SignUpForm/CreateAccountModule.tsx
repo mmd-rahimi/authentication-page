@@ -29,7 +29,7 @@ function LoginModule() {
         </div>
         {/* input side */}
         <div className="bg-white dark:bg-black text-black dark:text-white h-[72%] w-full lg:h-full lg:w-[40%] px-6 py-4 flex flex-row justify-center items-center">
-          <div className="lg:hidden block absolute top-41 right-2 sm:top-47 sm:right-2  z-10">
+          <div className="lg:hidden block absolute top-45 right-2 sm:top-47 sm:right-2  z-10">
             <ThemeToggle />
           </div>
           <div className="flex flex-col">

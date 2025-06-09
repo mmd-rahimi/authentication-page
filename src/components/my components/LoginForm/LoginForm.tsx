@@ -47,7 +47,7 @@ function LoginForm() {
               <input id="username"
                 {...register("username")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                  errors.username ? "border-red-500" : "border-gray-300"
+                  errors.username ? "border-red-500" : "border-black dark:border-white"
                 }`}
                 type="text"
                 placeholder="username"
@@ -60,33 +60,30 @@ function LoginForm() {
             </div>
             {/* password */}
             <div>
-              <div className="flex flex-row justify-between items-center">
                 <input id="password"
                   {...register("password")}
                   className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                    errors.password ? "border-red-500" : "border-gray-300"
+                    errors.password ? "border-red-500" : "border-black dark:border-white"
                   }`}
                   type={showPassword ? "text" : "password"}
                   placeholder="password"
                 />
-                <button
-                  className="p-2"
+                              <button
+                  className="absolute right-4 top-92 sm:top-105 sm:right-10 lg:right-3 lg:top-82"
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                    <FaEyeSlash className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                   ) : (
-                    <FaEye className="h-5 w-5 text-gray-500" />
+                    <FaEye className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                   )}
                 </button>
-              </div>
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">
                   {errors.password.message}
                 </p>
               )}
-              {/* {error && <div className="text-red-500">{error}</div>} */}
             </div>
             {/* navigate link */}
             <div className="flex flex-row justify-start items-center w-full px-2">

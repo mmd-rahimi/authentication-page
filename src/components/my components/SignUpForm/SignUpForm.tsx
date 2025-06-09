@@ -50,7 +50,7 @@ function SignUpForm() {
               <input id="name"
                 {...register("name")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                  errors.name ? "border-red-500" : "border-gray-300"
+                  errors.name ? "border-red-500" : "border-black dark:border-white"
                 }`}
                 type="text"
                 placeholder="name"
@@ -66,7 +66,7 @@ function SignUpForm() {
               <input id="username"
                 {...register("username")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                  errors.username ? "border-red-500" : "border-gray-300"
+                  errors.username ? "border-red-500" : "border-black dark:border-white"
                 }`}
                 type="text"
                 placeholder="username"
@@ -82,7 +82,7 @@ function SignUpForm() {
               <input id="password"
                 {...register("password")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                  errors.password ? "border-red-500" : "border-gray-300"
+                  errors.password ? "border-red-500" : "border-black dark:border-white"
                 }`}
                 type={showPassword ? "text" : "password"}
                 placeholder="password"
@@ -109,7 +109,7 @@ function SignUpForm() {
               <input id="confirmpassword"
                 {...register("confirmPassword")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
-                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                  errors.confirmPassword ? "border-red-500" : "border-black dark:border-white"
                 }`}
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="confirm password"
