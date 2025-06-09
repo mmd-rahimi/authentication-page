@@ -2,19 +2,18 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router';
-import type { RegisterFormData } from '@/schemas/auth';
+import type { LoginFormData, RegisterFormData } from '@/schemas/auth';
 
 interface IUser {
   id: number;
   name: string;
   username: string;
-  email: string;
 }
 
 interface IAuthContext {
   user: IUser | null;
-  login: (username: string, password: string) => Promise<void>;
-  register: (userData: RegisterFormData) => Promise<void>;
+  login: (formData: LoginFormData) => Promise<{ success: boolean; error?: string }>;
+  register: (userData: RegisterFormData) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -35,12 +34,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsLoading(false);
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (formData: LoginFormData) => {
     try {
       const response = await axios.get(
         'http://localhost:3001/users',
         {
-          params: { username, password }
+          params: { username: formData.username, password: formData.password }
         }
       );
 
@@ -59,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (error) {
       return {
         success: false,
-        error: 'Network or server error'
+        error: 'server error'
       };
     }
   };
@@ -73,26 +72,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       );
 
       if (checkResponse.data.length > 0) {
-        throw new Error('Username already exists');
+        return {
+          success: false,
+          error: 'Username already exists'
+        }
       }
 
       // Create new user
-      const response = await axios.post(
-        'http://localhost:3001/users',
-        {
-          name: userData.name,
-          username: userData.username,
-          password: userData.password,
-          email: `${userData.username}@example.com`
-        }
-      );
-
+      await axios.post('http://localhost:3001/users', {
+        name: userData.name,
+        username: userData.username,
+        password: userData.password
+      })
+      
       toast.success('Account created successfully');
       navigate('/');
-      return response.data;
+      return {success: true};
     } catch (error) {
-      toast.error('Registration failed');
-      throw error;
+      return{
+        success: false,
+        error: 'Registration failed'
+      }
     }
   };
 

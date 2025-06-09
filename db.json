@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "user@example.com",
       "password": "$2a$10$W8hK5R2L5vWRJYH5z8nX.e6Yg7p9z6J8ZJ7v6Y8L9z5X2rV1bH3dK",
       "name": "John Doe",
@@ -20,6 +20,12 @@
       "username": "mmd1383",
       "password": "12345678",
       "email": "mmd1383@example.com"
+    },
+    {
+      "id": "5144",
+      "name": "dacac",
+      "username": "12345678",
+      "password": "12345678"
     }
   ]
 }

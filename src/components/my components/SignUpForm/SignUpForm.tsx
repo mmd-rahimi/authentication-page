@@ -3,13 +3,15 @@ import { registerSchema, type RegisterFormData } from "@/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 
 function SignUpForm() {
+  const { register: registerUser, isLoading: authLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { register: registerUser, isLoading } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -17,10 +19,22 @@ function SignUpForm() {
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: '',
+      username: '',
+      password: '',
+      confirmPassword: ''
+    }
   });
 
-  const onSubmit = handleSubmit(async (data) => {
-    await registerUser(data);
+    const onSubmit = handleSubmit(async (data) => {
+    setIsSubmitting(true);
+    const result = await registerUser(data);
+    setIsSubmitting(false);
+    
+    if (!result.success) {
+      toast.error(result.error || 'unknown error');
+    }
   });
 
   return (
@@ -33,7 +47,7 @@ function SignUpForm() {
             {/* inputs */}
             {/* name */}
             <div>
-              <input
+              <input id="name"
                 {...register("name")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                   errors.name ? "border-red-500" : "border-gray-300"
@@ -49,7 +63,7 @@ function SignUpForm() {
             </div>
             {/* Username */}
             <div>
-              <input
+              <input id="username"
                 {...register("username")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                   errors.username ? "border-red-500" : "border-gray-300"
@@ -65,7 +79,7 @@ function SignUpForm() {
             </div>
             {/* password */}
             <div>
-              <input
+              <input id="password"
                 {...register("password")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                   errors.password ? "border-red-500" : "border-gray-300"
@@ -92,7 +106,7 @@ function SignUpForm() {
             </div>
             {/* confirm Password */}
             <div>
-              <input
+              <input id="confirmpassword"
                 {...register("confirmPassword")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                   errors.confirmPassword ? "border-red-500" : "border-gray-300"
@@ -127,15 +141,15 @@ function SignUpForm() {
         </div>
         <div
           className={`mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100 ${
-            isLoading ? "opacity-70" : ""
+            isSubmitting || authLoading ? "opacity-70" : ""
           }`}
         >
           <button
             className="flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer"
             type="submit"
-            disabled={isLoading}
+            disabled={isSubmitting || authLoading}
           >
-            {isLoading ? "Registering..." : "Register"}
+            Register
           </button>
         </div>
       </form>

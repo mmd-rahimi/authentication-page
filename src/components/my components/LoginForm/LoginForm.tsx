@@ -6,30 +6,33 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoading } = useAuth();
-    // const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+  const { login, isLoading: authLoading} = useAuth();
 
-// const handleLogin = async (username: string, password: string): Promise<void> => {
-//     setError(null);
-//     const result: { success: boolean; error?: string | undefined} = await login(username, password);
-    
-//     if (!result.success) {
-//       setError(result.error || 'unknown error ');
-//     }
-// };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+        defaultValues: {
+      username: '',
+      password: ''
+    }
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    await login(data.username, data.password);
+    setIsSubmitting(true);
+    const result = await login(data);
+    setIsSubmitting(false)
+
+        if (!result.success) {
+      toast.error(result.error || 'unknown error');
+    }
   });
 
   return (
@@ -41,7 +44,7 @@ function LoginForm() {
             {/* inputs */}
             {/* username */}
             <div>
-              <input
+              <input id="username"
                 {...register("username")}
                 className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                   errors.username ? "border-red-500" : "border-gray-300"
@@ -58,7 +61,7 @@ function LoginForm() {
             {/* password */}
             <div>
               <div className="flex flex-row justify-between items-center">
-                <input
+                <input id="password"
                   {...register("password")}
                   className={`border px-5 py-2 rounded-3xl w-[18rem] ${
                     errors.password ? "border-red-500" : "border-gray-300"
@@ -93,8 +96,8 @@ function LoginForm() {
             </div>
           </div>
           <div className="mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
-            <button className={`flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer ${isLoading ? 'opacity-70' : ''}`} disabled={isLoading} type="submit">
-              {isLoading ? 'Logging in...' : 'Login'}
+            <button className={`flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer ${isSubmitting || authLoading ? 'opacity-70' : ''}`} disabled={isSubmitting || authLoading} type="submit">
+              Login
             </button>
           </div>
         </form>
