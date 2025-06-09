@@ -10,7 +10,16 @@ import { FaEyeSlash } from "react-icons/fa6";
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading } = useAuth();
+    // const [error, setError] = useState<string | null>(null);
 
+// const handleLogin = async (username: string, password: string): Promise<void> => {
+//     setError(null);
+//     const result: { success: boolean; error?: string | undefined} = await login(username, password);
+    
+//     if (!result.success) {
+//       setError(result.error || 'unknown error ');
+//     }
+// };
   const {
     register,
     handleSubmit,
@@ -74,6 +83,7 @@ function LoginForm() {
                   {errors.password.message}
                 </p>
               )}
+              {/* {error && <div className="text-red-500">{error}</div>} */}
             </div>
             {/* navigate link */}
             <div className="flex flex-row justify-start items-center w-full px-2">
@@ -82,7 +92,6 @@ function LoginForm() {
               </NavLink>
             </div>
           </div>
-
           <div className="mt-2 flex flex-row justify-center items-center bg-black dark:bg-white rounded-3xl text-white dark:text-black hover:opacity-75 transition duration-100">
             <button className={`flex justify-center items-center w-[8rem] h-[2.5rem] text-xl cursor-pointer ${isLoading ? 'opacity-70' : ''}`} disabled={isLoading} type="submit">
               {isLoading ? 'Logging in...' : 'Login'}
