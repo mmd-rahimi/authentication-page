@@ -46,7 +46,7 @@ function LoginForm() {
             <div>
               <input id="username"
                 {...register("username")}
-                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                   errors.username ? "border-red-500" : "border-gray-300"
                 }`}
                 type="text"
@@ -63,7 +63,7 @@ function LoginForm() {
               <div className="flex flex-row justify-between items-center">
                 <input id="password"
                   {...register("password")}
-                  className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                  className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                     errors.password ? "border-red-500" : "border-gray-300"
                   }`}
                   type={showPassword ? "text" : "password"}

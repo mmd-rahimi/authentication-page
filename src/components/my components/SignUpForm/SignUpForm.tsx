@@ -40,7 +40,7 @@ function SignUpForm() {
   return (
     <div className="">
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col gap-10 justify-center items-center">
+        <div className="flex flex-col gap-5 lg:gap-10  justify-center items-center">
           <div className="font-bold text-3xl">User Sign Up</div>
 
           <div className="flex flex-col justify-center items-center gap-3">
@@ -49,7 +49,7 @@ function SignUpForm() {
             <div>
               <input id="name"
                 {...register("name")}
-                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                   errors.name ? "border-red-500" : "border-gray-300"
                 }`}
                 type="text"
@@ -65,7 +65,7 @@ function SignUpForm() {
             <div>
               <input id="username"
                 {...register("username")}
-                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                   errors.username ? "border-red-500" : "border-gray-300"
                 }`}
                 type="text"
@@ -81,7 +81,7 @@ function SignUpForm() {
             <div>
               <input id="password"
                 {...register("password")}
-                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
                 type={showPassword ? "text" : "password"}
@@ -89,13 +89,13 @@ function SignUpForm() {
               />
               <button
                 type="button"
-                className="absolute right-2 top-98"
+                className="absolute right-4 top-102 sm:right-10 lg:right-3 lg:top-82"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                  <FaEyeSlash className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                 ) : (
-                  <FaEye className="h-5 w-5 text-gray-500" />
+                  <FaEye className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                 )}
               </button>
               {errors.password && (
@@ -108,7 +108,7 @@ function SignUpForm() {
             <div>
               <input id="confirmpassword"
                 {...register("confirmPassword")}
-                className={`border px-5 py-2 rounded-3xl w-[18rem] ${
+                className={`border px-5 py-2 rounded-3xl w-[18rem] md:w-[22rem] lg:w-[18rem] ${
                   errors.confirmPassword ? "border-red-500" : "border-gray-300"
                 }`}
                 type={showConfirmPassword ? "text" : "password"}
@@ -116,13 +116,13 @@ function SignUpForm() {
               />
               <button
                 type="button"
-                className="absolute right-2 top-110"
+                className="absolute right-4 top-115 sm:right-10 lg:right-3 lg:top-96"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (
-                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                  <FaEyeSlash className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                 ) : (
-                  <FaEye className="h-5 w-5 text-gray-500" />
+                  <FaEye className="h-6 w-6 text-black dark:text-white cursor-pointer transition duration-100 hover:scale-105" />
                 )}
               </button>
               {errors.confirmPassword && (

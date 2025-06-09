@@ -6,7 +6,7 @@ function LoginModule() {
     // module container
     <div
       className="rounded-3xl drop-shadow-2xl overflow-hidden shadow shadow-black dark:shadow-white border-black dark:border-white border-2
-    w-[25rem] h-[35rem]
+    w-[25rem] h-[40rem]
      sm:w-[28rem] sm:h-[40rem]
      md:w-[32rem] md:h-[40rem]
      lg:w-[60rem] lg:h-[40rem]
@@ -28,7 +28,7 @@ function LoginModule() {
           </div>
         </div>
         {/* input side */}
-        <div className="bg-white dark:bg-black text-black dark:text-white h-[72%] w-full lg:h-full lg:w-[40%] px-6 py-12 flex flex-row justify-center items-center">
+        <div className="bg-white dark:bg-black text-black dark:text-white h-[72%] w-full lg:h-full lg:w-[40%] px-6 py-4 flex flex-row justify-center items-center">
           <div className="lg:hidden block absolute top-41 right-2 sm:top-47 sm:right-2  z-10">
             <ThemeToggle />
           </div>
