@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (response.data.length === 0) {
         return {
-          succses: false,
+          success: false,
           error: "username or password is incorrect"
         }
       }
@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem('user', JSON.stringify(userData));
       toast.success('Logged in successfully');
       navigate('/Home');
+      return {success: true}
     } catch (error) {
       return {
         success: false,
