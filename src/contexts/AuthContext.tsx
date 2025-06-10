@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       toast.success('Logged in successfully');
       navigate('/Home');
       return {success: true}
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'server error'
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       toast.success('Account created successfully');
       navigate('/');
       return {success: true};
-    } catch (error) {
+    } catch {
       return{
         success: false,
         error: 'Registration failed'

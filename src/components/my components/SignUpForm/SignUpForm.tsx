@@ -89,7 +89,7 @@ function SignUpForm() {
               />
               <button
                 type="button"
-                className="absolute right-4 top-102 sm:right-10 lg:right-3 lg:top-82"
+                className={`absolute right-4 top-102 sm:right-10 lg:right-3 lg:top-82 ${errors.password ? 'top-105 lg:top-85' : ''}`}
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -116,7 +116,7 @@ function SignUpForm() {
               />
               <button
                 type="button"
-                className="absolute right-4 top-115 sm:right-10 lg:right-3 lg:top-96"
+                className={`absolute right-4 top-115 sm:right-10 lg:right-3 lg:top-96 ${errors.password ? 'top-124 lg:top-104' : ''}`}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (
